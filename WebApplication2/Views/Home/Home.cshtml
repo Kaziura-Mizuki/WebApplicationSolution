@@ -55,14 +55,14 @@
                 if (data.data.length != 0) {
                     for (var i = 0; i < data.data.length;i++){
                         var user_id = data.data[i].user_id;
+                        var username = "";
                         if (data.data[i].username != null) {
                             var username = data.data[i].username;
                         }
-                        var username = "";
+                        var password = "";
                         if (data.data[i].password != null){
                             var password = data.data[i].password;
                         }
-                        var password = "";
                         child.innerHTML += `<tr><td>${user_id}</td><td>${username}</td><td>${password}</td></tr>`
                     }
                     element.appendChild(child);
