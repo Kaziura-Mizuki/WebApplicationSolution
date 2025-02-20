@@ -1,0 +1,135 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "New Page";
+}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.dataTables.min.css">
+<script type="text/javascript" src="https://cdn.datatables.net/fixedcolumns/3.2.6/js/dataTables.fixedColumns.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.min.js"></script>
+
+
+<!--<div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:10px;">
+    <div id="tableContainer">
+        <table id="table">
+            <thead>
+                <tr>
+                    <th>User_Id</th>
+                    <th>UserName</th>
+                    <th>Password</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+-->
+<div class="card shadow mt-4">
+    <div class="card-body shadow-sm">
+        <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+            <table class="table my-0" id="table" style="width:100%;">
+                <thead>
+                    <tr>
+                        <th style="text-align:center; font-size: 13px;">User_Id</th>
+                        <th style="text-align:center; font-size: 13px;">UserName</th>
+                        <th style="text-align:center; font-size: 13px;">Password</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $(document).ready(function () {
+        var element = document.getElementById("table");
+        var child = document.createElement("tbody");
+        $.ajax({
+            url: "/Home/GetTodo",
+            type: "GET",
+            success:function(data){
+                if (data.data.length != 0) {
+                    for (var i = 0; i < data.data.length;i++){
+                        var user_id = data.data[i].user_id;
+                        if (data.data[i].username != null) {
+                            var username = data.data[i].username;
+                        }
+                        var username = "";
+                        if (data.data[i].password != null){
+                            var password = data.data[i].password;
+                        }
+                        var password = "";
+                        child.innerHTML += `<tr><td>${user_id}</td><td>${username}</td><td>${password}</td></tr>`
+                    }
+                    element.appendChild(child);
+                }
+            }
+        })
+    });
+
+
+    function test() {
+        //alert("Hello world");
+        $.ajax({
+            url: "/Home/GetMessages",
+            type: "GET",
+            success: function (data) {
+                alert(data.message);
+            },
+            error: function (error) {
+                alert("Error");
+            }
+        });
+    }
+
+    function ClickGet() {
+        var numberElement = document.getElementById("number");
+        console.log(numberElement, "ne");
+        var id = numberElement.value - 1;
+        console.log(id, "id");
+        if (id <= 3 && id >= 0) {
+            $.ajax({
+                url: "/Home/GetData",
+                type: "POST",
+                data: { id: id },
+                success: function (data) {
+                    console.log(data.data[0].familyName, "data");
+                    var dataContainerElement = document.getElementById("dataContainer");
+                    if (data.data.length > 0) {
+                        var childElement = `${data.data[0].firstName}${data.data[0].familyName}`;
+                        dataContainerElement.innerHTML = childElement;
+                    }
+                },
+                error: function (error) {
+                    alert("Error");
+                }
+            });
+        }else{
+            alert("Over");
+        }
+    }
+
+    function ClickGetTodo() {
+        $.ajax({
+            url: "/Home/GetTodo",
+            type: "GET",
+            success: function (data) {
+                console.log(data.data, "data from database");
+                var dataContainerElement = document.getElementById("dataContainerTodo");
+                if (data.data.length > 0) {
+                    for (var i = 0; i < data.data.length; i++) {
+                        var childElement = `${data.data[i].user_id} ${data.data[i].username} ${data.data[i].password}`;
+                        dataContainerElement.innerHTML += childElement;
+                    }
+                }
+            },
+            error: function (error) {
+                alert("Error");
+            }
+        });
+    }
+</script>
