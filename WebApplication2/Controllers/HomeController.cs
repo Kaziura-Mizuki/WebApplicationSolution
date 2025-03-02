@@ -14,11 +14,6 @@ namespace WebApplication2.Controllers
     public class HomeController : Controller
     {
         private readonly AppDbContext _context;
-        /*
-        public HomeController(AppDbContext context)
-        {
-            _context = context;
-        }*/
 
         CommonService commonService = new CommonService();
 
@@ -29,27 +24,11 @@ namespace WebApplication2.Controllers
             _logger = logger;
             _context = context;
         }
-        /*
-        public IActionResult Index()
-        {
-            return View();
-        }
-        */
+        
 
         public IActionResult Home()
         {
             return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
         public ActionResult GetMessages()
