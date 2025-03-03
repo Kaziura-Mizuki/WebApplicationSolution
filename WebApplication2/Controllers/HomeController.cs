@@ -14,14 +14,15 @@ namespace WebApplication2.Controllers
     {
         private readonly AppDbContext _context;
 
-        CommonService commonService = new CommonService();
+        private readonly CommonService _commonService;
 
-        private readonly ILogger<HomeController> _logger;
+        private readonly HomeService _service;
 
-        public HomeController(ILogger<HomeController> logger,AppDbContext context)
+        public HomeController(AppDbContext context,HomeService service,CommonService commonService)
         {
-            _logger = logger;
             _context = context;
+            _service = service;
+            _commonService = commonService;
         }
         
 
@@ -35,6 +36,14 @@ namespace WebApplication2.Controllers
             return Json(new { message = "Greetings from server!" });
         }
 
+        public ActionResult GetData()
+        {
+            return Json(new { data = _service.GetDataService() });
+        }
 
+        public ActionResult GetDataTodo()
+        {
+            return Json(new { data = _service.GetDataServiceTodo() });
+        }
     }
 }

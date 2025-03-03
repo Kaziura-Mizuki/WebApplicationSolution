@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WebApplication2.Models;
 using System;
+using WebApplication2.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +24,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(connectionString,sqlServerOptions => sqlServerOptions.EnableRetryOnFailure(maxRetryCount:5,maxRetryDelay:TimeSpan.FromSeconds(30),errorNumbersToAdd:null))
     );
 
+builder.Services.AddScoped<CommonService>();
+builder.Services.AddScoped<HomeService>();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();

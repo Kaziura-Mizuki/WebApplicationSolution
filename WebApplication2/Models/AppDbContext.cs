@@ -8,17 +8,20 @@ using System.Linq;
 namespace WebApplication2.Models
 {
 
-    public class AppDbContext: DbContext
+    public partial class AppDbContext: DbContext
     {
+
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
         }
 
-
+        public virtual DbSet<User> User { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<User>().ToTable("User");
 
         }
     }

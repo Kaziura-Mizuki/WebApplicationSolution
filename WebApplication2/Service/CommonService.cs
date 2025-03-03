@@ -8,6 +8,11 @@ namespace WebApplication2.Service
     {
         private readonly AppDbContext _context;
 
+        public CommonService(AppDbContext context)
+        {
+            _context = context;
+        }
+
         public int GetNextSequenceValue(string seq_name)
         {
             FormattableString sql = $"SELECT NEXT VALUE FOR dbo.{seq_name};";
