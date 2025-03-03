@@ -23,6 +23,7 @@
                             <th style="text-align:center; font-size: 13px;">Id</th>
                             <th style="text-align:center; font-size: 13px;">Name</th>
                             <th style="text-align:center; font-size: 13px;">Action</th>
+                            <th style="text-align:center; font-size: 13px;">Action</th>
                         </tr>
                     </thead>
                 </table>
@@ -100,7 +101,7 @@
                             Name = data.data[i].name;　//data.data[i].nameでデータのnameを取得できる。
                         }
                         
-                        child.innerHTML += `<tr><td style="text-align:center">${Id}</td><td style="text-align:center">${Name}</td><td style="text-align: center;"><button onclick="ClickEdit(${Id})">編集</button></td></tr>`　//innerHTMLでHTML要素を追加することができる。ここではテーブルの行を追加している。
+                        child.innerHTML += `<tr><td style="text-align:center">${Id}</td><td style="text-align:center">${Name}</td><td style="text-align: center;"><button onclick="ClickEdit(${Id})">編集</button></td><td style="text-align: center;"><button onclick="ClickDelete(${Id})">削除</button></td></tr>`　//innerHTMLでHTML要素を追加することができる。ここではテーブルの行を追加している。
                     }
                     element.appendChild(child);　 //appendChild()で要素を追加することができる。ここではテーブルの行を追加している。
                 }
@@ -189,6 +190,28 @@
                 if (data.result == true) {
                     alert("Success");
                     $('#openEditModal').modal('hide');
+                    $('#table').empty();
+                    ClickGetData();
+                }
+                else {
+                    alert("Error");
+                }
+            },
+            error: function (error) {
+                alert("Error");
+            }
+        });
+    }
+
+    //step5の目標：ClickDelete()のリクエスト先をHomeControllerクラスのDeleteDataTodo()に変更する。
+    function ClickDelete(id) {
+        $.ajax({
+            url: "/Home/DeleteData",
+            type: "POST",
+            data: { id: id },
+            success: function (data) {
+                if (data.result == true) {
+                    alert("Success");
                     $('#table').empty();
                     ClickGetData();
                 }

@@ -134,5 +134,28 @@ namespace WebApplication2.Service
         {
             return false;
         }
+
+        public bool DeleteDataService(int id)
+        {
+            var query = (from m in _context.User
+                         where m.Id == id
+                         select m).ToList();
+            if (query != null)
+            {
+                _context.User.Remove(query[0]);
+                _context.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        //目標:DeleteDataServiceTodoメソッドを修正し、データベースコンテキストのデータを削除する。
+        //ヒント:DeleteDataServiceメソッドを参考にしてください。
+        public bool DeleteDataServiceTodo(int id)
+        {
+            return false;
+        }
     }
 }

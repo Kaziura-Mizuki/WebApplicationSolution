@@ -74,5 +74,17 @@ namespace WebApplication2.Controllers
         {
             return Json(new { result = _service.EditDataServiceTodo(viewModel) });
         }
+
+        [HttpPost]
+        public ActionResult DeleteData(int id)
+        {
+            return Json(new { result = _service.DeleteDataService(id) });
+        }
+
+        [HttpPost]
+        public ActionResult DeleteDataTodo(int id)
+        {
+            return Json(new { result = _service.DeleteDataServiceTodo(id) });
+        }
     }
 }
