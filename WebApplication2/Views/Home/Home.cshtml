@@ -12,22 +12,8 @@
 <script type="text/javascript" src="https://cdn.datatables.net/fixedcolumns/3.2.6/js/dataTables.fixedColumns.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.min.js"></script>
 
-<button onclick="ClickGetMessage()">Get Message from Server</button>
+<!--step6の目標：設計書のようなTodoアプリを作成する。-->
 
 <script>
-    //Step1の目標：ClickGetMessage()を修正してHomeControllerクラスのGetMessage()から取得したメッセージである文字列をalert()で表示させる。
-    //ヒント：console.log()でdataの中を見てみよう。
-    function ClickGetMessage() {
-        $.ajax({
-            url: "/Home/GetMessage",　//取得したい文字列やデータがあるネットワーク上の場所をURLで指定する。
-            type: "GET",
-            success: function (data) {
-                alert("wrong");
-            },
-            error: function (error) {
-                alert("Error");
-            }
-        });
-    }
 
 </script>
