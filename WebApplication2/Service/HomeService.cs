@@ -85,5 +85,54 @@ namespace WebApplication2.Service
         {
             return false;
         }
+
+        public HomeViewModel GetDataByIdService(int id)
+        {
+            var query = (from m in _context.User
+                         where m.Id == id
+                         select m).ToList();
+            if (query != null)
+            {
+                HomeViewModel homeViewModel = new HomeViewModel();
+                homeViewModel.Id = query[0].Id;
+                homeViewModel.Name = query[0].Name;
+                return homeViewModel;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public bool EditDataService(HomeViewModel viewModel)
+        {
+            if(viewModel.Name != "")
+            {
+                var query = (from m in _context.User
+                             where m.Id == viewModel.Id
+                             select m).ToList();
+                if(query != null)
+                {
+                    query[0].Name = viewModel.Name;
+                    _context.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        //目標:EditDataServiceTodoメソッドを修正し、データベースコンテキストのデータを編集する。
+        //ヒント:EditDataServiceメソッドを参考にしてください。
+        public bool EditDataServiceTodo(HomeViewModel viewModel)
+        {
+            return false;
+        }
     }
 }

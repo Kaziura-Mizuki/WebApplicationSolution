@@ -22,6 +22,7 @@
                         <tr>
                             <th style="text-align:center; font-size: 13px;">Id</th>
                             <th style="text-align:center; font-size: 13px;">Name</th>
+                            <th style="text-align:center; font-size: 13px;">Action</th>
                         </tr>
                     </thead>
                 </table>
@@ -40,7 +41,26 @@
                     <input id="name"/>
                 </div>
                 <div class="modal-footer" style="text-align:center">
-                    <button type="button" name="submitButton" value="" class="btn btn-success btn-icon-split" id="editModal" onclick="CreateModal()">
+                    <button type="button" name="submitButton" value="" class="btn btn-success btn-icon-split" id="createModal" onclick="CreateModal()">
+                        <span class="text-white-50 icon"><i class="fas fa-plus-circle"></i></span><span class="text-white text">保存</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="openEditModal" class="modal fade" role="dialog" style="width:100%;justify-content:center;">
+        <div class="modal-dialog modal-xl" style="max-width:500px;">
+            <div class="modal-content text-center">
+                <div class="modal-header">
+                    <h4 class="modal-title">編集</h4>
+                    <button type="button" onclick="CloseEditModal()">x</button>
+                </div>
+                <div class="modal-body">
+                    <input id="Id" hidden />
+                    <input id="nameEdit"/>
+                </div>
+                <div class="modal-footer" style="text-align:center">
+                    <button type="button" name="submitButton" value="" class="btn btn-success btn-icon-split" id="editModal" onclick="EditModal()">
                         <span class="text-white-50 icon"><i class="fas fa-plus-circle"></i></span><span class="text-white text">保存</span>
                     </button>
                 </div>
@@ -80,7 +100,7 @@
                             Name = data.data[i].name;　//data.data[i].nameでデータのnameを取得できる。
                         }
                         
-                        child.innerHTML += `<tr><td style="text-align:center">${Id}</td><td style="text-align:center">${Name}</td></tr>`　//innerHTMLでHTML要素を追加することができる。ここではテーブルの行を追加している。
+                        child.innerHTML += `<tr><td style="text-align:center">${Id}</td><td style="text-align:center">${Name}</td><td style="text-align: center;"><button onclick="ClickEdit(${Id})">編集</button></td></tr>`　//innerHTMLでHTML要素を追加することができる。ここではテーブルの行を追加している。
                     }
                     element.appendChild(child);　 //appendChild()で要素を追加することができる。ここではテーブルの行を追加している。
                 }
@@ -117,6 +137,59 @@
                     alert("Success");
                     $('#openModal').modal('hide'); //modalを閉じる
                     $('#table').empty(); //tableの中身を空にする
+                    ClickGetData();
+                }
+                else {
+                    alert("Error");
+                }
+            },
+            error: function (error) {
+                alert("Error");
+            }
+        });
+    }
+
+    function ClickEdit(id) {
+        $.ajax({
+            url: "/Home/GetDataById",
+            type: "GET",
+            data: { id: id },
+            success: function (data) {
+                if (data.data.length != 0) {
+                    $('#nameEdit').val(data.data.name);
+                    $('#Id').val(data.data.id);
+                    $('#openEditModal').modal('show');
+                }
+                else {
+                    alert("No data");
+                }
+            },
+            error: function (error) {
+                alert("Error");
+            }
+        });
+    }
+
+    function CloseEditModal() {
+        $('#name').val("");
+        $('#Id').val("");
+        $('#openEditModal').modal('hide');
+    }
+
+
+    //step4の目標：EditModal()のリクエスト先をHomeControllerクラスのEditDataTodo()に変更する。
+    function EditModal(){
+        var name = $('#nameEdit').val();
+        var id = $('#Id').val();
+        $.ajax({
+            url: "/Home/EditData",
+            type: "POST",
+            data: { name: name, id: id },
+            success: function (data) {
+                if (data.result == true) {
+                    alert("Success");
+                    $('#openEditModal').modal('hide');
+                    $('#table').empty();
                     ClickGetData();
                 }
                 else {
