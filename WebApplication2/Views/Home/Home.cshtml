@@ -130,7 +130,7 @@
     function CreateModal() {
         var name = $('#name').val();
         $.ajax({
-            url: "/Home/CreateData",
+            url: "/Home/CreateDataTodo",
             type: "POST",
             data: { name: name }, //送りたいデータをオブジェクト形式で指定する。
             success: function (data) {
@@ -183,7 +183,7 @@
         var name = $('#nameEdit').val();
         var id = $('#Id').val();
         $.ajax({
-            url: "/Home/EditData",
+            url: "/Home/EditDataTodo",
             type: "POST",
             data: { name: name, id: id },
             success: function (data) {

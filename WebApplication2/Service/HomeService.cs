@@ -83,7 +83,20 @@ namespace WebApplication2.Service
         //ヒント:CreateDataServiceメソッドを参考にしてください
         public bool CreateDataServiceTodo(HomeViewModel viewModel)
         {
-            return false;
+            if (viewModel.Name != "")
+            {
+                User user = new User();
+                var newId = (from c in _context.User select c).Max(c => c.Id) + 1;
+                user.Id = newId;
+                user.Name = viewModel.Name;
+                _context.User.Add(user);
+                _context.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public HomeViewModel GetDataByIdService(int id)
@@ -132,7 +145,26 @@ namespace WebApplication2.Service
         //ヒント:EditDataServiceメソッドを参考にしてください。
         public bool EditDataServiceTodo(HomeViewModel viewModel)
         {
-            return false;
+            if (viewModel.Name != "")
+            {
+                var query = (from m in _context.User
+                             where m.Id == viewModel.Id
+                             select m).ToList();
+                if (query != null)
+                {
+                    query[0].Name = viewModel.Name;
+                    _context.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public bool DeleteDataService(int id)
