@@ -7,7 +7,6 @@ using System.Linq;
 
 namespace WebApplication2.Models
 {
-    //using Microsoft.EntityFrameworkCore;
 
     public class AppDbContext: DbContext
     {
@@ -15,16 +14,12 @@ namespace WebApplication2.Models
         {
         }
 
-        //public DbSet<ErrorViewModel> ErrorViewModels { get; set; }
 
-        public virtual DbSet<Todo> Todo{ get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Todo>().ToTable("Users");
-            modelBuilder.Entity<Todo>().HasKey(p => p.user_id);
         }
     }
 }
