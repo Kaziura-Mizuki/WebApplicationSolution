@@ -30,7 +30,7 @@ namespace WebApplication2.Controllers
             return View();
         }
 
-        public ActionResult GetMessages()
+        public ActionResult GetMessage()
         {
             return Json(new { message = "Greetings from server!" });
         }

@@ -15,10 +15,9 @@
 <button onclick="ClickGetMessage()">Get Message from Server</button>
 
 <script>
-
     function ClickGetMessage() {
         $.ajax({
-            url: "/Home/GetMessages",
+            url: "/Home/GetMessage",
             type: "GET",
             success: function (data) {
                 alert("wrong");
