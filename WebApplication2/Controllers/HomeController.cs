@@ -45,5 +45,17 @@ namespace WebApplication2.Controllers
         {
             return Json(new { data = _service.GetDataServiceTodo() });
         }
+
+        [HttpPost]
+        public ActionResult CreateData(HomeViewModel viewModel)
+        {
+            return Json(new { result = _service.CreateDataService(viewModel) });
+        }
+
+        [HttpPost]
+        public ActionResult CreateDataTodo(HomeViewModel viewModel)
+        {
+            return Json(new { result = _service.CreateDataServiceTodo(viewModel) });
+        }
     }
 }

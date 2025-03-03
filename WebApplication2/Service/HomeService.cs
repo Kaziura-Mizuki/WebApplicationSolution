@@ -15,9 +15,12 @@ namespace WebApplication2.Service
     {
         private readonly AppDbContext _context;
 
-        public HomeService(AppDbContext context)
+        private readonly CommonService _commonService;
+
+        public HomeService(AppDbContext context,CommonService commonService)
         {
             _context = context;
+            _commonService = commonService;
         }
 
         public List<HomeViewModel> GetDataService()
@@ -42,7 +45,45 @@ namespace WebApplication2.Service
         //ヒント:GetDataServiceメソッドを参考にしてください
         public List<HomeViewModel> GetDataServiceTodo()
         {
-            return null;
+            List<HomeViewModel> list = new List<HomeViewModel>(); 
+            var query = (from m in _context.User 
+                         select m).ToList();
+            if (query != null)
+            {
+                for (var i = 0; i < query.Count; i++)
+                { 
+                    HomeViewModel homeViewModel = new HomeViewModel();
+                    homeViewModel.Id = query[i].Id;
+                    homeViewModel.Name = query[i].Name;
+                    list.Add(homeViewModel);
+                }
+            }
+            return list;
+        }
+
+        public bool CreateDataService(HomeViewModel viewModel)
+        {
+            if(viewModel.Name != "")
+            {
+                User user = new User();
+                var newId = (from c in _context.User select c).Max(c => c.Id) + 1; //UserテーブルのIdの最大値に1を足したものをnewIdに代入
+                user.Id = newId;
+                user.Name = viewModel.Name;
+                _context.User.Add(user); //Userテーブルにuserを追加
+                _context.SaveChanges();  //データベースに変更を保存
+                return true;
+            }
+            else {
+                return false;
+            }
+            
+        }
+        
+        //目標:CreateDataServiceTodoメソッドを修正し、データベースコンテキストに新しいデータを追加する。
+        //ヒント:CreateDataServiceメソッドを参考にしてください
+        public bool CreateDataServiceTodo(HomeViewModel viewModel)
+        {
+            return false;
         }
     }
 }

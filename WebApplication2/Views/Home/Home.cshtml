@@ -28,6 +28,25 @@
             </div>
         </div>
     </div>
+    <button onclick="OpenModal()">Open Modal</button>
+    <div id="openModal" class="modal fade" role="dialog" style="width:100%;justify-content:center;">
+        <div class="modal-dialog modal-xl" style="max-width:500px;">
+            <div class="modal-content text-center">
+                <div class="modal-header">
+                    <h4 class="modal-title">新規作成</h4>
+                    <button type="button" onclick="CloseModal()">x</button>
+                </div>
+                <div class="modal-body">
+                    <input id="name"/>
+                </div>
+                <div class="modal-footer" style="text-align:center">
+                    <button type="button" name="submitButton" value="" class="btn btn-success btn-icon-split" id="editModal" onclick="CreateModal()">
+                        <span class="text-white-50 icon"><i class="fas fa-plus-circle"></i></span><span class="text-white text">保存</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <script>
     //Step1の目標：ClickGetMessage()を修正してHomeControllerクラスのGetMessage()から取得したメッセージである文字列をalert()で表示させる。
@@ -37,7 +56,7 @@
             url: "/Home/GetMessage",　//取得したい文字列やデータを返してくれるネットワーク上の場所をURLで指定する。
             type: "GET",
             success: function (data) {
-                alert("wrong");
+                alert(data.message);
             },
             error: function (error) {
                 alert("Error");
@@ -48,7 +67,7 @@
     //Step2の目標：ClickGetData()でのリクエストの送り先をHomeControllerクラスのGetDataTodo()に変更し、GetDataTodo()がデータを返すようにする。
     function ClickGetData() {
         $.ajax({
-            url: "/Home/GetData",　//取得したい文字列やデータがあるネットワーク上の場所をURLで指定する。
+            url: "/Home/GetDataTodo",　//取得したい文字列やデータがあるネットワーク上の場所をURLで指定する。
             type: "GET",
             success: function (data) {
                 if (data.data.length != 0) { //data.data.lengthが0でない場合、データがあるということ。
@@ -67,6 +86,41 @@
                 }
                 else {
                     alert("No data");　//データがない場合、アラートを表示する。
+                }
+            },
+            error: function (error) {
+                alert("Error");
+            }
+        });
+    }
+
+    function OpenModal() {
+        $('#name').val("");
+        $('#openModal').modal('show');
+    }
+
+    function CloseModal() {
+        $('#name').val("");
+        $('#openModal').modal('hide');
+    }
+
+
+    //step3の目標:CreateModal()のリクエスト先をHomeContollerクラスのCreateDataTodo()に変更する。
+    function CreateModal() {
+        var name = $('#name').val();
+        $.ajax({
+            url: "/Home/CreateData",
+            type: "POST",
+            data: { name: name }, //送りたいデータをオブジェクト形式で指定する。
+            success: function (data) {
+                if (data.result == true) {
+                    alert("Success");
+                    $('#openModal').modal('hide'); //modalを閉じる
+                    $('#table').empty(); //tableの中身を空にする
+                    ClickGetData();
+                }
+                else {
+                    alert("Error");
                 }
             },
             error: function (error) {
