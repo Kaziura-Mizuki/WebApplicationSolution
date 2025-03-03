@@ -83,7 +83,20 @@ namespace WebApplication2.Service
         //ヒント:CreateDataServiceメソッドを参考にしてください
         public bool CreateDataServiceTodo(HomeViewModel viewModel)
         {
-            return false;
+            if (viewModel.Name != "")
+            {
+                User user = new User();
+                var newId = (from c in _context.User select c).Max(c => c.Id) + 1;
+                user.Id = newId;
+                user.Name = viewModel.Name;
+                _context.User.Add(user);
+                _context.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public HomeViewModel GetDataByIdService(int id)
