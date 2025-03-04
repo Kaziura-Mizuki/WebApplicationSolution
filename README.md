@@ -10,7 +10,7 @@
 ※[VSC2022インストール手順参考サイト](https://qiita.com/mmake/items/e0abb649683b96e2226a)
 
 ## SQL Server2022とSQL Server Management Studio(SSMS)のインストール手順
-1．[ここをクリック](https://qiita.com/portfoliokns3/items/9e3d1196d680a39dd223)してサイトにアクセスし、サイトを参考にして進める。
+1．[ここをクリック](https://qiita.com/portfoliokns3/items/9e3d1196d680a39dd223)してサイトにアクセスし、サイトを参考にして進めて下さい。
 
 ## SSMSから自PC内のSQL Serverに接続する手順(以下英語ver)
 1．SSMSを起動すると画像にような画面が表示されると思います。そして画面左側のオブジェクトエクスプローラーのコンセントのようなアイコンをクリックして接続モーダルを表示させます。
