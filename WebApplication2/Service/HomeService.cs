@@ -34,7 +34,7 @@ namespace WebApplication2.Service
                     list.Add(homeViewModel);　//listにhomeViewModelを追加
                 }
             }
-            return list;　//listを呼び出し元であるHomeController()に返す
+            return list;　//listを呼び出し元であるHomeControllerクラスのGetData()に返す
         }
 
 
