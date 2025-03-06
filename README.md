@@ -1,0 +1,2 @@
+# DB接続文字
+## appsettings.jsonファイルのMyConnectionに対応する接続文字列のUser IdとPasswordの値をサーバーに登録したログインユーザーの名前とパスワードに書き換えて下さい。以降のステップでも同様に書き換えて下さい。
