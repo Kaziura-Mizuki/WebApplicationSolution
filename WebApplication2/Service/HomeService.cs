@@ -38,8 +38,8 @@ namespace WebApplication2.Service
         }
 
 
-        //目標:GetDataServiceTodoメソッドを修正し、データベースコンテキストから取得したデータをhomeViewModelに格納して、それらをリスト化して返す
-        //ヒント:GetDataServiceメソッドを参考にしてください
+        //目標:GetDataServiceTodoメソッドを修正し、データベースコンテキストから取得したデータをhomeViewModelに格納して、それらをリスト化して返すようにして下さい。
+        //ヒント:GetDataServiceメソッドを参考にして下さい。
         public List<HomeViewModel> GetDataServiceTodo()
         {
             return null;

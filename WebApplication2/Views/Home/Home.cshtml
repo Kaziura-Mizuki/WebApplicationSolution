@@ -55,6 +55,7 @@
     }
 
     function ClickGetData() {
+        $('#table').html('<thead><tr><th style="text-align:center; font-size: 13px;">Id</th><th style="text-align:center; font-size: 13px;">Name</th><tr></thead>');
         $.ajax({
             url: "/Home/GetData",　//取得したい文字列やデータがあるネットワーク上の場所をURLで指定する。
             type: "GET",
