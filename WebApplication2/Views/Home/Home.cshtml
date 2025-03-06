@@ -11,9 +11,10 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.dataTables.min.css">
 <script type="text/javascript" src="https://cdn.datatables.net/fixedcolumns/3.2.6/js/dataTables.fixedColumns.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.min.js"></script>
-<div id="container" style="width:100%;display:flex;flex-direction:column;align-items:center;">
+<div id="container" style="width:50%;display:flex;flex-direction:column;align-items:center;">
+    <h1 style="position:absolute;top:10%;left:22%;">見本</h1>
     <button onclick="ClickGetMessage()">Get Message from Server</button>
-    <button onclick="ClickGetData()" style="margin-top:20px">Get Data From From Database</button>
+    <button onclick="ClickGetData()" style="margin-top:20px">Get Data From Database</button>
     <div class="card shadow mt-4" style="width:300px">
         <div class="card-body shadow-sm">
             <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
@@ -47,6 +48,46 @@
             </div>
         </div>
     </div>
+</div>
+<div style="height:100%;border-right:1px solid black"></div>
+<div style="width:50%;display:flex;flex-direction:column;align-items:center;">
+    <h1 style="position:absolute;top:10%;right:22%;">演習</h1>
+    <button onclick="ClickGetMessage()">Get Message from Server</button>
+    <button onclick="ClickGetDataTodo()" style="margin-top:20px">Get Data From Database</button>
+    <div class="card shadow mt-4" style="width:300px">
+        <div class="card-body shadow-sm">
+            <div class="table-responsive table mt-2" role="grid" aria-describedby="dataTable_info">
+                <table class="table my-0" id="tableTodo" style="width:100%;">
+                    <thead>
+                        <tr>
+                            <th style="text-align:center; font-size: 13px;">Id</th>
+                            <th style="text-align:center; font-size: 13px;">Name</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div id="openModalTodo" class="modal fade" role="dialog" style="width:100%;justify-content:center;">
+        <div class="modal-dialog modal-xl" style="max-width:500px;">
+            <div class="modal-content text-center">
+                <div class="modal-header">
+                    <h4 class="modal-title">新規作成</h4>
+                    <button type="button" onclick="CloseModalTodo()">x</button>
+                </div>
+                <div class="modal-body">
+                    <input id="nameTodo" />
+                </div>
+                <div class="modal-footer" style="text-align:center">
+                    <button type="button" name="submitButton" value="" class="btn btn-success btn-icon-split" id="editModalTodo" onclick="CreateModalTodo()">
+                        <span class="text-white-50 icon"><i class="fas fa-plus-circle"></i></span><span class="text-white text">保存</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--ここに見本を参考にしてHTMLを書いて下さい-->
+    <!--目標１：クリックしたらidがopenModalTodoの要素を表示させるOpenModalTodo()を呼び出すボタンを書いて下さい-->
 </div>
 <script>
     //Step1の目標：ClickGetMessage()を修正してHomeControllerクラスのGetMessage()から取得したメッセージである文字列をalert()で表示させる。
@@ -94,9 +135,42 @@
         });
     }
 
+    function ClickGetDataTodo(){
+                $.ajax({
+            url: "/Home/GetDataTodo",
+            type: "GET",
+            success: function(data){
+                if(data.data.length != 0){
+                    var element = document.getElementById("tableTodo");
+                    var child = document.createElement("tbody");
+                    for(var i = 0; i < data.data.length; i++){
+                        var Id = data.data[i].id;
+                        var Name = "";
+                        if(data.data[i].name != null){
+                            Name = data.data[i].name;
+                        }
+                        child.innerHTML += `<tr><td style="text-align:center">${Id}</td><td style="text-align:center">${Name}</td></tr>`
+                    }
+                    element.appendChild(child);
+                }
+                else{
+                    alert("No data");
+                }
+            },
+            error: function(error){
+                alert("Error");
+            }
+        });
+    }
+
     function OpenModal() {
         $('#name').val("");
         $('#openModal').modal('show');
+    }
+
+    function OpenModalTodo(){
+        $('#nameTodo').val("");
+        $('#openModalTodo').modal('show');
     }
 
     function CloseModal() {
@@ -104,8 +178,11 @@
         $('#openModal').modal('hide');
     }
 
+    function CloseModalTodo(){
+        $('#nameTodo').val("");
+        $('#openModalTodo').modal('hide');
+    }
 
-    //step3の目標:CreateModal()のリクエスト先をHomeContollerクラスのCreateDataTodo()に変更する。
     function CreateModal() {
         var name = $('#name').val();
         $.ajax({
@@ -127,6 +204,11 @@
                 alert("Error");
             }
         });
+    }
+    //step3の目標:CreateModalTodo()を修正し、HomeControllerクラスのCreateDataTodo()に登録したいデータを送信して結果を返してもらい、返ってきた結果をalert()で表示さて下さい。
+    //ヒント：CreateModal()を参考にして下さい。
+    function CreateModalTodo() {
+
     }
 
 </script>
