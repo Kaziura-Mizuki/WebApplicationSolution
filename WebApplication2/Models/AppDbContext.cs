@@ -17,11 +17,14 @@ namespace WebApplication2.Models
 
         public virtual DbSet<User> User { get; set; }
 
+        public virtual DbSet<UserTodo> UserTodo { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<User>().ToTable("User");
+            modelBuilder.Entity<UserTodo>().ToTable("UserTodo");
 
         }
     }

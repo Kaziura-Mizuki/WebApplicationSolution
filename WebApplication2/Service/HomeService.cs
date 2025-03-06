@@ -46,7 +46,7 @@ namespace WebApplication2.Service
         public List<HomeViewModel> GetDataServiceTodo()
         {
             List<HomeViewModel> list = new List<HomeViewModel>(); 
-            var query = (from m in _context.User 
+            var query = (from m in _context.UserTodo
                          select m).ToList();
             if (query != null)
             {
@@ -85,11 +85,15 @@ namespace WebApplication2.Service
         {
             if (viewModel.Name != "")
             {
-                User user = new User();
-                var newId = (from c in _context.User select c).Max(c => c.Id) + 1;
+                UserTodo user = new UserTodo();
+                int newId = 1;
+                if(_context.UserTodo.Count() != 0)
+                {
+                    newId = (from c in _context.UserTodo select c).Max(c => c.Id) + 1;
+                }
                 user.Id = newId;
                 user.Name = viewModel.Name;
-                _context.User.Add(user);
+                _context.UserTodo.Add(user);
                 _context.SaveChanges();
                 return true;
             }
@@ -102,6 +106,24 @@ namespace WebApplication2.Service
         public HomeViewModel GetDataByIdService(int id)
         {
             var query = (from m in _context.User
+                         where m.Id == id
+                         select m).ToList();
+            if (query != null)
+            {
+                HomeViewModel homeViewModel = new HomeViewModel();
+                homeViewModel.Id = query[0].Id;
+                homeViewModel.Name = query[0].Name;
+                return homeViewModel;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public HomeViewModel GetDataByIdServiceTodo(int id)
+        {
+            var query = (from m in _context.UserTodo
                          where m.Id == id
                          select m).ToList();
             if (query != null)
@@ -147,7 +169,7 @@ namespace WebApplication2.Service
         {
             if (viewModel.Name != "")
             {
-                var query = (from m in _context.User
+                var query = (from m in _context.UserTodo
                              where m.Id == viewModel.Id
                              select m).ToList();
                 if (query != null)

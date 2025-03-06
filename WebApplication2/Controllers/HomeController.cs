@@ -63,6 +63,11 @@ namespace WebApplication2.Controllers
             return Json(new { data = _service.GetDataByIdService(id) });
         }
 
+        public ActionResult GetDataByIdTodo(int id)
+        {
+            return Json(new { data = _service.GetDataByIdServiceTodo(id) });
+        }
+
         [HttpPost]
         public ActionResult EditData(HomeViewModel viewModel) 
         {
