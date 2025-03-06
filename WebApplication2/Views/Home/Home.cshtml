@@ -11,7 +11,8 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.dataTables.min.css">
 <script type="text/javascript" src="https://cdn.datatables.net/fixedcolumns/3.2.6/js/dataTables.fixedColumns.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.min.js"></script>
-<div id="container" style="width:100%;display:flex;flex-direction:column;align-items:center;">
+<div id="container" style="width:50%;display:flex;flex-direction:column;align-items:center;">
+    <h1 style="position:absolute;top:10%;left:22%;">見本</h1>
     <button onclick="ClickGetMessage()">Get Message from Server</button>
     <button onclick="ClickGetData()" style="margin-top:20px">Get Data From From Database</button>
     <div class="card shadow mt-4" style="width:300px">
@@ -29,6 +30,14 @@
         </div>
     </div>
 </div>
+<div style="height:100%;border-right:1px solid black;"></div>
+<div style="width:50%;display:flex;flex-direction:column;align-items:center;">
+    <h1 style="position:absolute;top:10%;right:22%;">演習</h1>
+    <!--ここに見本を参考にしてHTMLを書いて下さい-->
+    <!--目標１：クリックするとClickGetMessage()を呼び出すボタン要素を書いて下さい-->
+    <!--目標２：クリックするとClickGetDataTodo()を呼び出すボタン要素を書いて下さい-->
+    <!--目標３：データを表示するためのテーブル要素を書いて下さい-->
+</div>
 <script>
     //Step1の目標：ClickGetMessage()を修正してHomeControllerクラスのGetMessage()から取得したメッセージである文字列をalert()で表示させる。
     //ヒント：console.log()でdataの中を見てみよう。
@@ -45,7 +54,6 @@
         });
     }
 
-    //Step2の目標：ClickGetData()でのリクエストの送り先をHomeControllerクラスのGetDataTodo()に変更し、GetDataTodo()がデータを返すようにする。
     function ClickGetData() {
         $.ajax({
             url: "/Home/GetData",　//取得したい文字列やデータがあるネットワーク上の場所をURLで指定する。
@@ -73,6 +81,12 @@
                 alert("Error");
             }
         });
+    }
+
+    //Step2の目標：ClickGetDataTodo()を修正してHomeControllerクラスのGetDataTodo()から取得したデータをテーブルに表示させて下さい。
+    //ヒント：ClickGetData()を参考にして下さい。
+    function ClickGetDataTodo() {
+
     }
 
 </script>
