@@ -63,6 +63,13 @@ namespace WebApplication2.Controllers
             return Json(new { data = _service.GetDataByIdService(id) });
         }
 
+        //目標:GetDataByIdTodoメソッドを修正し、Service/HomeService.csのGetDataByIdServiceTodoメソッドを呼び出して、データベースコンテキストから取得したデータをhomeViewModelに格納して返す
+        //ヒント:GetDataByIdメソッドを参考にして下さい。
+        public ActionResult GetDataByIdTodo()
+        {
+            return null;
+        }
+
         [HttpPost]
         public ActionResult EditData(HomeViewModel viewModel) 
         {

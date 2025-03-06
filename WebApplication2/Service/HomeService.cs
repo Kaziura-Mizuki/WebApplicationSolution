@@ -117,6 +117,13 @@ namespace WebApplication2.Service
             }
         }
 
+        //目標:GetDataByIdTodoメソッドを修正し、データベースコンテキストから取得したデータをhomeViewModelに格納して返す
+        //ヒント:GetDataByIdメソッドを参考にして下さい。
+        public HomeViewModel GetDataByIdServiceTodo(int id)
+        {
+            return null;
+        }
+
         public bool EditDataService(HomeViewModel viewModel)
         {
             if(viewModel.Name != "")
