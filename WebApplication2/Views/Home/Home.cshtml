@@ -107,8 +107,9 @@
 
     //Step2の目標：ClickGetData()でのリクエストの送り先をHomeControllerクラスのGetDataTodo()に変更し、GetDataTodo()がデータを返すようにする。
     function ClickGetData() {
+        $('#table').html('<thead><tr><th style="text-align:center; font-size: 13px;">Id</th><th style="text-align:center; font-size: 13px;">Name</th><tr></thead>');
         $.ajax({
-            url: "/Home/GetDataTodo",　//取得したい文字列やデータがあるネットワーク上の場所をURLで指定する。
+            url: "/Home/GetData",　//取得したい文字列やデータがあるネットワーク上の場所をURLで指定する。
             type: "GET",
             success: function (data) {
                 if (data.data.length != 0) { //data.data.lengthが0でない場合、データがあるということ。
@@ -136,7 +137,8 @@
     }
 
     function ClickGetDataTodo(){
-                $.ajax({
+        $('#tableTodo').html('<thead><tr><th style="text-align:center; font-size: 13px;">Id</th><th style="text-align:center; font-size: 13px;">Name</th><tr></thead>');
+            $.ajax({
             url: "/Home/GetDataTodo",
             type: "GET",
             success: function(data){
@@ -205,7 +207,7 @@
             }
         });
     }
-    //step3の目標:CreateModalTodo()を修正し、HomeControllerクラスのCreateDataTodo()に登録したいデータを送信して結果を返してもらい、返ってきた結果をalert()で表示さて下さい。
+    //step3の目標:CreateModalTodo()を修正し、HomeControllerクラスのCreateDataTodo()に登録したいデータを送信して結果を返してもらい、返ってきた結果をalert()で表示させて下さい。
     //ヒント：CreateModal()を参考にして下さい。
     function CreateModalTodo() {
 

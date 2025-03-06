@@ -46,7 +46,7 @@ namespace WebApplication2.Service
         public List<HomeViewModel> GetDataServiceTodo()
         {
             List<HomeViewModel> list = new List<HomeViewModel>(); 
-            var query = (from m in _context.User 
+            var query = (from m in _context.UserTodo 
                          select m).ToList();
             if (query != null)
             {
@@ -66,7 +66,11 @@ namespace WebApplication2.Service
             if(viewModel.Name != "")
             {
                 User user = new User();
-                var newId = (from c in _context.User select c).Max(c => c.Id) + 1; //UserテーブルのIdの最大値に1を足したものをnewIdに代入
+                int newId = 1;
+                if (_context.User.Count() != 0) //Userテーブルのデータが1つ以上ある場合
+                {
+                    newId = (from c in _context.User select c).Max(c => c.Id) + 1; //UserテーブルのIdの最大値に1を足したものをnewIdに代入
+                }
                 user.Id = newId;
                 user.Name = viewModel.Name;
                 _context.User.Add(user); //Userテーブルにuserを追加
