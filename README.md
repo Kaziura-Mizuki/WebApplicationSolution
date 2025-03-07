@@ -3,5 +3,5 @@
 
 ## Step2でやること
 Step2の目標1：WebApplication2/Views/Home/Home.cshtmlファイルの演習用のHTMLを追加して下さい。<br>
-Step2の目標2：WebApplication2/Controllers/HomeContoroller.csファイルのClickGetDataTodo()を修正してHomeControllerクラスのGetDataTodo()から取得したデータをテーブルに表示させて下さい。<br>
+Step2の目標2：WebApplication2/Views/Home/Home.cshtmlファイルのClickGetDataTodo()を修正してHomeControllerクラスのGetDataTodo()から取得したデータをテーブルに表示させて下さい。<br>
 Step2の目標3：WebApplication2/Service/HomeService.csファイルのGetDataServiceTodoメソッドを修正し、データベースコンテキストから取得したデータをhomeViewModelに格納して、それらをリスト化して返すようにして下さい。
