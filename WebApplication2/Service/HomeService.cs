@@ -66,8 +66,6 @@ namespace WebApplication2.Service
             if(viewModel.Name != "")
             {
                 User user = new User();
-                var newId = (from c in _context.User select c).Max(c => c.Id) + 1; //UserテーブルのIdの最大値に1を足したものをnewIdに代入
-                user.Id = newId;
                 user.Name = viewModel.Name;
                 _context.User.Add(user); //Userテーブルにuserを追加
                 _context.SaveChanges();  //データベースに変更を保存
@@ -86,12 +84,6 @@ namespace WebApplication2.Service
             if (viewModel.Name != "")
             {
                 UserTodo user = new UserTodo();
-                int newId = 1;
-                if(_context.UserTodo.Count() != 0)
-                {
-                    newId = (from c in _context.UserTodo select c).Max(c => c.Id) + 1;
-                }
-                user.Id = newId;
                 user.Name = viewModel.Name;
                 _context.UserTodo.Add(user);
                 _context.SaveChanges();
