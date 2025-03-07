@@ -197,7 +197,7 @@ namespace WebApplication2.Service
                 return false;
             }
         }
-        //目標:DeleteDataServiceTodoメソッドを修正し、データベースコンテキストのデータを削除する。
+        //目標:DeleteDataServiceTodoメソッドを修正し、データベースコンテキストのデータを削除して下さい。
         //ヒント:DeleteDataServiceメソッドを参考にしてください。
         public bool DeleteDataServiceTodo(int id)
         {
