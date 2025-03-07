@@ -1,0 +1,6 @@
+## Step4でやること
+Step4の目標１：WebApplication2/Views/Home/Home.cshtmlファイルのClickEditTodo()を修正し、HomeControllerクラスのGetDataByIdTodo()にリクエストを送り、返されたデータをidがopenEditModalの要素に入れて表示させて下さい。<br>
+Step4の目標２：WebApplication2/Views/Home/Home.cshtmlファイルのEditModalTodo()を修正し、HomeControllerクラスのEditDataTodo()にリクエストを送り、結果をalert()で表示させて下さい。<br>
+Step4の目標３：WebApplication2/Controllers/HomeController.csファイルのGetDataByIdTodoメソッドを修正し、Service/HomeService.csのGetDataByIdServiceTodoメソッドを呼び出して返されたデータをJson形式で返して下さい。<br>
+Step4の目標４：WebApplication2/Service/HomeService.csファイルのGetDataByIdTodoメソッドを修正し、データベースコンテキストから取得したデータをhomeViewModelに格納して返して下さい。<br>
+Step4の目標５：WebApplication2/Service/HomeService.csファイルのEditDataServiceTodoメソッドを修正し、データベースコンテキストのデータを編集して下さい。
