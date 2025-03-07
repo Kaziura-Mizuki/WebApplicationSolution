@@ -60,19 +60,13 @@ namespace WebApplication2.Service
             }
             return list;
         }
-
+        //Idはデータベースで自動生成されるため、Idを指定する必要はありません。
         public bool CreateDataService(HomeViewModel viewModel)
         {
             if(viewModel.Name != "")
             {
                 User user = new User();
-                int newId = 1;
-                if (_context.User.Count() != 0) //Userテーブルのデータが1つ以上ある場合
-                {
-                    newId = (from c in _context.User select c).Max(c => c.Id) + 1; //UserテーブルのIdの最大値に1を足したものをnewIdに代入
-                }
-                user.Id = newId;
-                user.Name = viewModel.Name;
+                user.Name = viewModel.Name; 
                 _context.User.Add(user); //Userテーブルにuserを追加
                 _context.SaveChanges();  //データベースに変更を保存
                 return true;
