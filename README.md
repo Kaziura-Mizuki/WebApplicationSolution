@@ -6,8 +6,11 @@
 　・Web&クラウド："ASP.NETとWeb開発"にチェックを入れる。<br>
 　・デスクトップとモバイル：".NETデスクトップ開発"にチェックを入れる。<br>
 　・他のツールセット："データの保存と処理"にチェックを入れる。<br>
- 
-※[VSC2022インストール手順参考サイト](https://qiita.com/mmake/items/e0abb649683b96e2226a)
+
+※[VSC2022インストール手順参考サイト](https://qiita.com/mmake/items/e0abb649683b96e2226a)<br>
+
+## Githubのリポジトリをフォーク及びクローンする手順
+1.Githubのアカウントをお持ちでない場合は[ここをクリック](https://github.com)して公式サイトでアカウントを作成して下さい。(作成したアカウント名やパスワード、登録した際のメールアドレスは忘れないよう保管しておいて下さい。)<br>
 
 ## SQL Server2022とSQL Server Management Studio(SSMS)のインストール手順
 1．[ここをクリック](https://qiita.com/portfoliokns3/items/9e3d1196d680a39dd223)してサイトにアクセスし、サイトを参考にして進めて下さい。
