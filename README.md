@@ -23,7 +23,13 @@
 4.しかし、クローン後に自動で開かれたのはリポジトリ自体であり、今回Visual Studioで開くのはそのリポジトリ内のWebApplicationSolution.slnというファイルです。なので再びスタートウィンドウを開き、今度は"プロジェクトやソリューションを開く"をクリックし、表示されたエクスプローラーでクローンしたリポジトリ内のWebApplicationSolution.slnファイルを開いて下さい。
 
 ## プロジェクトに必要なパッケージをVisual Studioでインストールする手順
-１．Visual Studioを起動して下さい。
+１．Visual Studioを起動して下さい。画面上部のツールから順にツール→NuGetパッケージマネージャー→ソリューションのパッケージマネージャーの管理をクリックすると画像のようなタブが表示されます。(画像は既にインストールした後のものです。)<br>
+ここで画像の4つのパッケージをインストールします。インストールするには参照をクリックしてから検索で以下の4つのパッケージを検索し、任意のプロジェクトにチェックマークをいれてインストールをクリックして下さい。<br>
+・Microsoft.EntityFrameworkCore.SqlServer
+・MySql.Data
+・MySql.EntityFrameworkCore
+・System.Data.SqlClient
+
 
 ## SQL Server2022とSQL Server Management Studio(SSMS)のインストール手順
 1．[ここをクリック](https://qiita.com/portfoliokns3/items/9e3d1196d680a39dd223)してサイトにアクセスし、サイトを参考にして進めて下さい。
